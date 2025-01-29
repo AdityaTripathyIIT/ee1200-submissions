@@ -10,6 +10,7 @@
 \usepackage{circuitikz}
 \renewcommand{\headrulewidth}{0pt}
 \usepackage{soul}
+\usepackage[section]{placeins}
 % Colors for the references links
 \usepackage[dvipsnames]{xcolor}
 % Package to link references
@@ -78,7 +79,7 @@ To study the response of RC circuit to square wave input voltage signal when
 \section{Theory}
 \begin{figure}[!ht]
 \centering
-\resizebox{1\textwidth}{!}{%
+\resizebox{0.5\textwidth}{!}{%
 \begin{circuitikz}
 \tikzstyle{every node}=[font=\LARGE]
 \draw (11,11.5) to[square voltage source, sources/symbol/rotate=auto] (13,11.5);
@@ -91,7 +92,7 @@ To study the response of RC circuit to square wave input voltage signal when
 \draw (12.75,14.25) to[short, -o] (12.75,15.5) ;
 \draw (15.25,14.25) to[short, -o] (15.25,15.5) ;
 \node [font=\LARGE] at (9.25,16) {A};
-\draw (15.25,14.25) to (15.25,10.75) node[ground]{};
+\draw (15.25,14.25) to (15.25,10.55) node[ground]{};
 \node [font=\LARGE] at (15,16.5) {};
 \node [font=\LARGE] at (12.75,16) {B};
 \draw (9.25,14.25) to[short, -o] (9.25,15.5) ;
@@ -127,6 +128,9 @@ Now the aim is to study experimental response in the three aforementioned cases 
 \item Use the square wave output function in the function generator and use the Time Period option to set the desired time period for the voltage signal.
 \item To capture the response to first few cycles of input voltage signal, set an appropriate trigger level, set "Sweep = Normal" under "Mode Coupling" menu and set "Trigger = Manual" on the function generator.
 \end{itemize}
+\item Make sure that you either use an unpolarised capacitor, with an input voltage signal with
+  high of 5Vrms and low value of -5Vrms, or use an electrolytic capacitor with same high value but 
+  low value of 0mV with the longer terminal of the capacitor connected to higher potential.
 \end{enumerate}
 \section{Justification}
 We will be using Python along with Matplotlib and Numpy libraries to verify our experiment's results. The following code plots out the theoretical response of the RC circuit to the input square wave using the numerical solution shown above.
@@ -166,22 +170,26 @@ plt.savefig("RC=T.png")
 plt.show()
 \end{verbatim}
 By following the procedure for different values R and C, we produced the following  verified them using the previously mentioned code.
-The parameters for the signals used are present in the pictures of the function generator menu.
-\subsection{1.}
-	  \begin{center}
-		  \includegraphics[width=0.5\columnwidth]{figs/RC=T_exp.jpg}\\
-		  \includegraphics[width=0.4\columnwidth]{figs/RC=T_sim.png}
-	  \end{center}
-  \subsection{2.}
-	  \begin{center}
-		  \includegraphics[width=0.5\columnwidth]{figs/RC=0.01T_exp.jpg}\\
-		  \includegraphics[width=0.4\columnwidth]{figs/RC=0.01T_sim.png}
-	  \end{center}
-  \subsection{3.}
-	  \begin{center}
-		  \includegraphics[width=0.5\columnwidth]{figs/RC=100T_exp_steady.jpg}\\
-		  \includegraphics[width=0.4\columnwidth]{figs/RC=100T_sim.png}
-	  \end{center}
-\section{Conclusion}
-We generated simple sinusoidal signals and made Lissajous figures with them, observing patterns emerging from the frequency ratios, symmetry, phase differences; and verified them using code.
+The parameters for the signals used are present in the pictures.
+\section{Results}
+\begin{figure}[!htb]
+  {\includegraphics[width=0.5\columnwidth]{figs/RC=T_exp.jpg}}
+  \hspace{\fill}
+  {\includegraphics[width=0.5\columnwidth]{figs/RC=T_sim.png}}
+  \caption{RC = T}
+\end{figure}
+ \begin{figure}[!htb]
+  {\includegraphics[width=0.5\columnwidth]{figs/RC=0.01T_exp.jpg}}
+  \hspace{\fill}
+  {\includegraphics[width=0.5\columnwidth]{figs/RC=0.01T_sim.png}}
+  \caption{RC = 0.01T}
+\end{figure}
+\begin{figure}[!htb]
+  {\includegraphics[width=0.5\columnwidth]{figs/RC=100T_exp.jpg}}
+  \hspace{\fill}
+  {\includegraphics[width=0.5\columnwidth]{figs/RC=100T_sim.png}}
+  \caption{RC = 100T}
+\end{figure}
+	\section{Conclusion}
+We successfully graphed the response of an RC circuit to a square wave response.
 \end{document}
