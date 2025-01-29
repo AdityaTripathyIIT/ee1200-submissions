@@ -191,5 +191,9 @@ The parameters for the signals used are present in the pictures.
   \caption{RC = 100T}
 \end{figure}
 	\section{Conclusion}
-We successfully graphed the response of an RC circuit to a square wave response.
+\begin{enumerate}
+  \item $RC = T$: The capacitor charges to a peak value in the positive half cycle and in the negative half cycle, the initially charged capacitor can be seen as an uncharged capacitor with a series voltage source($CV_0$) acting in series with the square wave input with same polarity, so it will charge to a negative charge on the capacitor. This process repeats untill a steady state is reached.
+  \item $RC = 0.01T$: Since the time constant is much smaller than the time period of input signal, it will charge to peak voltages very quickly and as a result the response closely imitates the input voltage signal. 
+  \item $RC = 100T$: In the positive half cycle, the capacitor will charge to a very small value, and in the negative half cylce it will charge approximately to 0(slightly less than zero). This process repeats till steady state is reached.
+\end{enumerate}
 \end{document}
