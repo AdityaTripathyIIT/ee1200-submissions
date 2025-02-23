@@ -1,0 +1,166 @@
+\documentclass[a4paper,12pt]{article}
+% Package to make citations superscrit with brackets
+\usepackage[super,square]{natbib}
+% Package to change margin size
+\usepackage{anysize}
+\usepackage{amsmath}
+\marginsize{2cm}{2cm}{1cm}{2cm}
+% Package to make headers
+\usepackage{fancyhdr}
+\usepackage{circuitikz}
+\renewcommand{\headrulewidth}{0pt}
+\usepackage{soul}
+\usepackage[section]{placeins}
+% Colors for the references links
+\usepackage[dvipsnames]{xcolor}
+% Package to link references
+\usepackage{hyperref}
+\usepackage{graphicx}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    citecolor=CadetBlue,
+    filecolor=CadetBlue,      
+    urlcolor=CadetBlue,
+}
+% Package for lorem ipsum
+\usepackage{lipsum}
+% Package for multicolumn
+\usepackage{multicol}
+% Package for removing paragraph identations
+\usepackage{parskip}
+\setlength\columnsep{18pt}
+% Sets bastract
+\renewenvironment{abstract}
+ {\par\noindent\textbf{\abstractname}\ \ignorespaces \\}
+ {\par\noindent\medskip}
+
+
+
+ 
+\begin{document}
+% Makes header
+\pagestyle{fancy}
+\thispagestyle{empty}
+\fancyhead[R]{\textit{EE1200}}
+\fancyhead[L]{}
+% Makes footnotes with an asterisk
+\renewcommand*{\thefootnote}{\fnsymbol{footnote}}
+\begin{center}
+\Large{\textbf{Experiment 04}}
+\vspace{0.4cm}
+\normalsize
+\\ Aditya Tripathy - ee24btech11001, Durgi Swaraj Sharma - ee24btech11018\\
+\medskip
+\normalsize
+\end{center}
+{\color{gray}\hrule}
+\vspace{0.4cm}
+\begin{abstract}
+In Experiment-04, we try to capture LC oscillations.
+\end{abstract}
+{\color{gray}\hrule}
+\medskip
+\section{Objective}
+To study the response of a series RLC circuit with a precharged capacitor.
+
+\section{Apparatus}
+\begin{itemize}
+\item Oscilloscope
+\item Regulated DC power supply
+\item Connecting wires and probes
+\item Unpolarised capacitor (560$pF$)
+\item Inductor (2.2$mH$)
+\end{itemize}
+\section{Theory}
+\begin{figure}[!ht]
+\centering
+\resizebox{1\textwidth}{!}{%
+\begin{circuitikz}
+\tikzstyle{every node}=[font=\LARGE]
+\draw (6,14.25) to[R] (8,14.25);
+\draw (8,14.25) to[L ] (9.25,14.25);
+\draw (9.25,14.25) to[C] (12,14.25);
+\draw (6,14.25) to[short] (5,14.25);
+\draw (5,14.25) to[short] (5,12);
+\draw (5,12) to[short] (12,12);
+\draw (12,14.25) to[short] (12,12);
+\draw (10,14.25) to[short, -o] (10,15.75) ;
+\draw (11.25,14.25) to[short, -o] (11.25,15.75) ;
+\node [font=\LARGE] at (10.5,16.5) {5V};
+\end{circuitikz}
+}%
+\label{fig:my_label}
+\end{figure}
+The resposnse to the circuit shown is the solution to the initial value problem:
+\begin{align}
+  L\frac{di}{dt} + iR + \frac{q}{C} = 0
+\end{align}
+with $q(0) = 0$ and $i(0) = 0$
+\newline
+Since q = $CV_c$, i = $C\frac{dV_c}{dt}$. Now the equation becomes,
+\begin{align}
+  LC\frac{d^2V_c}{dt^2} + RC\frac{dV_c}{dt} + V_c = 0 
+\end{align}
+with $V_c(0) = 0$ and ${V_c}^{\prime}(0) = 0$ 
+\newline
+The complementary solution to the differential equation is given by 
+\begin{align}
+  y_c = c_1e^{s_1t} + ce^{s_2t}
+\end{align}
+where $s_1, s_2$ are solutions to the following quadratic equation
+\begin{align}
+  LCs^2 + RCs + 1 = 0
+\end{align}
+Therefore,
+\begin{align}
+  s_1, s_2 = -\frac{R}{2L} \pm \sqrt{(\frac{R}{2L})^2 - \frac{1}{LC}}
+\end{align}
+Since we wish to study the underdamped case for RLC response, 
+\begin{align}
+  (\frac{R}{2L})^2 - \frac{1}{LC} < 0
+\end{align}
+Now the complementary solution can be written more conveniently as
+\begin{align}
+  y_c = e^{-\frac{Rt}{2L}}(c_1 \cos(\sqrt(\frac{1}{LC} - (\frac{R}{2L})^2))t  +  c_2 \sin(\sqrt(\frac{1}{LC} - (\frac{R}{2L})^2)t))\\
+  \rightarrow y_c = e^{\beta}(c_1 \cos(w_d t) + c_2 \sin(w_d t))
+\end{align}
+where
+\begin{align}
+  \beta = \text{Damping Factor} = \frac{R}{2L}\\
+  w_n = \text{Natural Frequency} = \frac{1}{\sqrt{LC}}\\
+  w_d = \text{Damped Resonance Frequency} = \sqrt{{w_n}^2 - \beta ^ 2}
+\end{align}
+Now plugging in the initial conditions we get,
+\begin{align}
+  c_1 = V_0\\
+  c_2 = \frac{RV_0}{2Lw_d}
+\end{align}
+Therefore, 
+\begin{align}
+  V_c (t) = V_0 e^{\beta}(\cos(w_d t) + \frac{R}{2Lw_d}\sin(w_d t))
+\end{align}
+\section{Procedure}
+\begin{enumerate}
+\item Connections
+\begin{itemize}
+\item Connect the first channel of the function generator to terminal A, and associated ground to C.
+\item Connect the first channel of the oscilloscope to terminal A, and the associated ground to C.
+\item Connect the second channel of the oscilloscope to terminal B, and the associated ground to C.
+\item Ensure scaling is 10X both on the probe wires and the oscilloscope.
+\end{itemize}
+\item Device Setup
+\begin{itemize}
+\item Construct the circuit as shown in the figure above.
+\item Use appropriate values of the components for the tree separate cases.
+\item Use the square wave output function in the function generator and use the Time Period option to set the desired time period for the voltage signal.
+\item To capture the response to first few cycles of input voltage signal, set an appropriate trigger level, set "Sweep = Normal" under "Mode Coupling" menu and set "Trigger = Manual" on the function generator.
+\end{itemize}
+\item Make sure that you either use an unpolarised capacitor, with an input voltage signal with
+  high of 5Vrms and low value of -5Vrms, or use an electrolytic capacitor with same high value but 
+  low value of 0mV with the longer terminal of the capacitor connected to higher potential.
+\end{enumerate}
+\section{Justification}
+We will be using Python along with Matplotlib and Numpy libraries to verify our experiment's results. The following code plots out the theoretical response of the RC circuit to the input square wave using the numerical solution shown above.
+\end{enumerate}
+\end{document}
