@@ -1,8 +1,8 @@
 import matplotlib.pyplot as plt 
 import numpy as np 
 
-R = 24.0
-L = 2.2*1e-3
+R = 30.0
+L = 0.396*1e-3
 C = 560*1e-12
 V_0 = 5
 
@@ -17,6 +17,5 @@ for x in t:
         print(x)
 
 plt.plot(t, V_c)
-plt.plot(t, (t/t)*3.6)
 plt.scatter([(6.2775)*1e-6, (6.2775+2.96)*1e-6,(6.2775+5.92)*1e-6,(6.2775+8.88)*1e-6, + (6.2775+11.92)*1e-6,(6.2775+17.84)*1e-6], [3.6,3.2,3.0,2.8,2.6,2.2])
 plt.show()
