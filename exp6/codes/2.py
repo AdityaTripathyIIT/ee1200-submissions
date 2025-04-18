@@ -42,5 +42,6 @@ plt.ylabel("Gain (dB)")
 plt.title("Sallen-Key High-Pass Filter Bode Plot")
 plt.legend()
 plt.grid(True)
+plt.savefig("highpass.png")
 plt.show()
 

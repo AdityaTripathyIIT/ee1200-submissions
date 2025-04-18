@@ -41,6 +41,7 @@ plt.xlabel("log10(Frequency (Hz))")
 plt.ylabel("Gain (dB)")
 plt.title("Sallen-Key Low-Pass Filter Bode Plot")
 plt.legend()
+plt.savefig("lowpass.png")
 plt.grid(True)
 plt.show()
 

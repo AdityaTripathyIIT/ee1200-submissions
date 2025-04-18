@@ -53,6 +53,7 @@ plt.xlabel("log10(Frequency (Hz))")
 plt.ylabel("Gain (dB)")
 plt.title("Sallen-Key Bandpass Filter Bode Plot")
 plt.legend()
+plt.savefig("bandpass.png")
 plt.grid(True)
 plt.show()
 
